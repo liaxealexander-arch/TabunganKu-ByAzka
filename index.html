@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabunganku</title>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-card">
+
+        <div class="logo">
+            💰
+        </div>
+
+        <h1>Tabunganku</h1>
+        <p class="login-subtitle">
+            Kelola tabunganmu dengan mudah
+        </p>
+
+        <div class="input-group">
+            <label>Username</label>
+            <input
+                type="text"
+                id="usernameInput"
+                placeholder="Masukkan username"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+
+            <div class="password-box">
+                <input
+                    type="password"
+                    id="passwordInput"
+                    placeholder="Masukkan password"
+                >
+
+                <button id="showPasswordBtn">👁️</button>
+            </div>
+        </div>
+
+        <button
+            class="primary-btn login-btn"
+            id="loginBtn"
+        >
+            Masuk
+        </button>
+
+        <p id="loginError" class="error-text"></p>
+
+        <div class="demo-account">
+            <small>Akun demo</small>
+            <br>
+            Username: <b>Azka</b>
+            <br>
+            Password: <b>123</b>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= APP ================= -->
+
+<div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">💰</div>
+
+            <div>
+                <h2>Tabunganku</h2>
+                <span>Saving Tracker</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button
+                class="nav-btn active"
+                data-page="dashboard"
+            >
+                🏠
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                class="nav-btn"
+                data-page="savings"
+            >
+                🎯
+                <span>Tabungan</span>
+            </button>
+
+            <button
+                class="nav-btn"
+                data-page="history"
+            >
+                📜
+                <span>Riwayat</span>
+            </button>
+
+            <button
+                class="nav-btn"
+                data-page="statistics"
+            >
+                📊
+                <span>Statistik</span>
+            </button>
+
+            <button
+                class="nav-btn"
+                data-page="settings"
+            >
+                ⚙️
+                <span>Pengaturan</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+                <div class="avatar">A</div>
+
+                <div>
+                    <strong id="sidebarUsername">Azka</strong>
+                    <small>Pengguna</small>
+                </div>
+            </div>
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+            >
+                🚪 Keluar
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p id="dateText"></p>
+            </div>
+
+            <div class="topbar-right">
+
+                <button
+                    class="icon-btn"
+                    id="themeBtn"
+                    title="Mode gelap"
+                >
+                    🌙
+                </button>
+
+                <div class="profile">
+                    <div class="avatar">A</div>
+                    <span id="profileUsername">Azka</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section
+            id="dashboardPage"
+            class="page active-page"
+        >
+
+            <div class="welcome">
+
+                <div>
+                    <span class="hello">Halo 👋</span>
+
+                    <h2>
+                        Selamat datang,
+                        <span id="welcomeUsername">
+                            Azka
+                        </span>
+                    </h2>
+
+                    <p>
+                        Yuk lanjutkan perjalanan menabungmu!
+                    </p>
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="dashboardAddBtn"
+                >
+                    + Tambah Tabungan
+                </button>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        💰
+                    </div>
+
+                    <div>
+                        <span>Total Tabungan</span>
+
+                        <strong id="totalSaved">
+                            Rp0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        🎯
+                    </div>
+
+                    <div>
+                        <span>Target Aktif</span>
+
+                        <strong id="activeGoals">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        🏆
+                    </div>
+
+                    <div>
+                        <span>Target Selesai</span>
+
+                        <strong id="completedGoals">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📈
+                    </div>
+
+                    <div>
+                        <span>Progress Keseluruhan</span>
+
+                        <strong id="overallProgress">
+                            0%
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTION -->
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Target Tabungan</h2>
+                    <p>Tabungan yang sedang kamu kejar</p>
+                </div>
+
+                <button
+                    class="text-btn"
+                    id="viewAllBtn"
+                >
+                    Lihat semua →
+                </button>
+
+            </div>
+
+
+            <div
+                id="dashboardGoals"
+                class="goals-grid"
+            ></div>
+
+
+            <div
+                id="dashboardEmpty"
+                class="empty-state hidden"
+            >
+                <div>🎯</div>
+
+                <h3>Belum ada target</h3>
+
+                <p>
+                    Buat target tabungan pertamamu.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    id="emptyAddBtn"
+                >
+                    + Buat Target
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- ================= SAVINGS ================= -->
+
+        <section
+            id="savingsPage"
+            class="page"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Semua Tabungan</h2>
+                    <p>Kelola semua target tabunganmu</p>
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="addGoalBtn"
+                >
+                    + Tambah Tabungan
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <div class="search-box">
+                    🔎
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Cari tabungan..."
+                    >
+                </div>
+
+                <select id="filterSelect">
+
+                    <option value="all">
+                        Semua
+                    </option>
+
+                    <option value="active">
+                        Aktif
+                    </option>
+
+                    <option value="completed">
+                        Selesai
+                    </option>
+
+                    <option value="pinned">
+                        Favorit
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                id="allGoals"
+                class="goals-grid"
+            ></div>
+
+        </section>
+
+
+        <!-- ================= HISTORY ================= -->
+
+        <section
+            id="historyPage"
+            class="page"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Riwayat Transaksi</h2>
+
+                    <p>
+                        Semua aktivitas tabunganmu
+                    </p>
+                </div>
+
+            </div>
+
+            <div
+                id="historyList"
+                class="history-list"
+            ></div>
+
+        </section>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section
+            id="statisticsPage"
+            class="page"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Statistik</h2>
+
+                    <p>
+                        Ringkasan perjalanan tabunganmu
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="statistics-grid">
+
+                <div class="chart-card">
+
+                    <h3>Progress Target</h3>
+
+                    <div
+                        id="progressChart"
+                        class="progress-chart"
+                    ></div>
+
+                </div>
+
+
+                <div class="chart-card">
+
+                    <h3>Ringkasan</h3>
+
+                    <div class="summary-list">
+
+                        <div>
+                            <span>Total target</span>
+                            <strong id="statTotalGoals">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Target aktif</span>
+                            <strong id="statActive">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Target selesai</span>
+                            <strong id="statCompleted">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Total transaksi</span>
+                            <strong id="statTransactions">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SETTINGS ================= -->
+
+        <section
+            id="settingsPage"
+            class="page"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Pengaturan</h2>
+
+                    <p>
+                        Kelola data dan tampilan aplikasi
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="settings-card">
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong>Mode Gelap</strong>
+
+                        <p>
+                            Gunakan tampilan gelap
+                        </p>
+                    </div>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="darkModeToggle"
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong>Export Data</strong>
+
+                        <p>
+                            Simpan seluruh data sebagai JSON
+                        </p>
+                    </div>
+
+                    <button
+                        class="secondary-btn"
+                        id="exportBtn"
+                    >
+                        📤 Export
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong>Import Data</strong>
+
+                        <p>
+                            Pulihkan data dari file JSON
+                        </p>
+                    </div>
+
+                    <button
+                        class="secondary-btn"
+                        id="importBtn"
+                    >
+                        📥 Import
+                    </button>
+
+                    <input
+                        type="file"
+                        id="importFile"
+                        accept=".json"
+                        hidden
+                    >
+
+                </div>
+
+
+                <div class="setting-row danger-row">
+
+                    <div>
+                        <strong>Hapus Semua Data</strong>
+
+                        <p>
+                            Menghapus semua target dan riwayat
+                        </p>
+                    </div>
+
+                    <button
+                        class="danger-btn"
+                        id="clearDataBtn"
+                    >
+                        🗑️ Hapus
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= MODAL TARGET ================= -->
+
+<div
+    id="goalModal"
+    class="modal hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="modalTitle">
+                    Tambah Tabungan
+                </h2>
+
+                <p>
+                    Buat target tabungan baru
+                </p>
+            </div>
+
+            <button
+                class="close-btn"
+                id="closeModalBtn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="goalForm">
+
+            <input
+                type="hidden"
+                id="editGoalId"
+            >
+
+            <div class="form-group">
+
+                <label>Nama Tabungan</label>
+
+                <input
+                    type="text"
+                    id="goalName"
+                    placeholder="Contoh: Beli iPhone"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Target Nominal</label>
+
+                <input
+                    type="number"
+                    id="goalTarget"
+                    placeholder="5000000"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Saldo Awal</label>
+
+                <input
+                    type="number"
+                    id="goalInitial"
+                    placeholder="0"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Tanggal Target</label>
+
+                <input
+                    type="date"
+                    id="goalDate"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Ikon</label>
+
+                <div class="emoji-picker">
+
+                    <button type="button" class="emoji-option selected">🎯</button>
+                    <button type="button" class="emoji-option">💻</button>
+                    <button type="button" class="emoji-option">📱</button>
+                    <button type="button" class="emoji-option">🚗</button>
+                    <button type="button" class="emoji-option">✈️</button>
+                    <button type="button" class="emoji-option">🏠</button>
+                    <button type="button" class="emoji-option">🎮</button>
+                    <button type="button" class="emoji-option">💎</button>
+
+                </div>
+
+                <input
+                    type="hidden"
+                    id="goalEmoji"
+                    value="🎯"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn full-btn"
+            >
+                Simpan Target
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MODAL TRANSACTION ================= -->
+
+<div
+    id="transactionModal"
+    class="modal hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="transactionTitle">
+                    Tambah Uang
+                </h2>
+
+                <p id="transactionGoalName">
+                    Tabungan
+                </p>
+
+            </div>
+
+            <button
+                class="close-btn"
+                id="closeTransactionBtn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="transactionForm">
+
+            <input
+                type="hidden"
+                id="transactionGoalId"
+            >
+
+            <input
+                type="hidden"
+                id="transactionType"
+                value="add"
+            >
+
+
+            <div class="amount-display">
+
+                <span>Rp</span>
+
+                <input
+                    type="number"
+                    id="transactionAmount"
+                    placeholder="0"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Catatan</label>
+
+                <input
+                    type="text"
+                    id="transactionNote"
+                    placeholder="Contoh: Nabung hari ini"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn full-btn"
+            >
+                Simpan Transaksi
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    id="toast"
+    class="toast"
+>
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">Berhasil</span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
